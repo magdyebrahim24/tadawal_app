@@ -10,5 +10,5 @@ class AddProductUseCase implements UseCase<Product, Product> {
   AddProductUseCase({required this.productRepository});
   @override
   Future<Either<Failure, Product>> call(Product product) =>
-      productRepository.addProduct();
+      productRepository.addProduct(product: product);
 }

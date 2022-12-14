@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tadawal/core/widgets/error_widget.dart';
+import 'package:tadawal/core/widgets/loader_widget.dart';
 import 'package:tadawal/features/product/presentation/cubit/product_cubit.dart';
 import 'package:tadawal/features/product/presentation/cubit/product_state.dart';
+import 'package:tadawal/features/product/presentation/widgets/product_content.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({Key? key}) : super(key: key);
@@ -11,49 +14,52 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  // _getProductData() =>
-  //     BlocProvider.of<ProductCubit>(context).getProductEntity();
+  _getProductFun() => BlocProvider.of<ProductCubit>(context).getProductEntity();
+  _addProductFun(data) => BlocProvider.of<ProductCubit>(context)
+      .addProductEntity(addProductData: data);
+
+  final Map<String, dynamic> addProductData = {
+    "id": 2,
+    "title": "magdy",
+    "description":
+        "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+    "price": 899,
+    "discountPercentage": 17.94,
+    "rating": 4.44,
+    "stock": 34,
+    "brand": "Apple",
+    "category": "smartphones",
+    "thumbnail": null,
+    "images": [
+      "https://i.dummyjson.com/data/products/2/1.jpg",
+      "https://i.dummyjson.com/data/products/2/2.jpg",
+      "https://i.dummyjson.com/data/products/2/3.jpg",
+      "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+    ]
+  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Details'),
+        centerTitle: true,
       ),
       body: BlocBuilder<ProductCubit, ProductStates>(builder: (context, state) {
         if (state is ProductIsLoadingState) {
-          return const Center(child: CircularProgressIndicator());
+          return loadingWidget();
         } else if (state is ProductErrorState) {
-          return Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Center(child: Text('error')),
-              FloatingActionButton(
-                onPressed: () =>
-                    BlocProvider.of<ProductCubit>(context).getProductEntity(),
-                child: const Icon(Icons.ac_unit_sharp),
-              ),
-            ],
-          );
+          return errorWidget(context,
+              onPressFun: _getProductFun, msg: state.msg);
         } else if (state is ProductLoadedState) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(state.product.tittle,
-                  style: Theme.of(context).textTheme.headline6),
-              Text(state.product.description,
-                  style: Theme.of(context).textTheme.bodyText1),
-              Text('${state.product.price.toString()}\$'),
-            ],
-          );
+          return productContent(context, product: state.product);
         } else {
           return const Center(child: Text('un expected state'));
         }
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<ProductCubit>().getProductEntity(),
-        child: const Icon(Icons.ac_unit_sharp),
+        onPressed: () => _addProductFun(addProductData),
+        child: const Icon(Icons.add),
       ),
     );
   }

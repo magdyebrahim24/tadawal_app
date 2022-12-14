@@ -6,6 +6,8 @@ import 'package:tadawal/features/home/presentation/screens/home_screen.dart';
 import 'package:tadawal/features/product/presentation/cubit/product_cubit.dart';
 import 'package:tadawal/features/product/presentation/product_screen/product_screen.dart';
 import 'package:tadawal/injection_container.dart' as di;
+
+
 class Routes {
   static const String initialRoute = '/';
   static const String homeRoute = '/homeScreen';
@@ -29,7 +31,7 @@ class AppRoutes {
         );
       case Routes.productRoute:
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const ProductScreen(),
         );
       case Routes.addProductRoute:
         return MaterialPageRoute(

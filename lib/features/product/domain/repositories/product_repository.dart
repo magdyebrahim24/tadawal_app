@@ -5,5 +5,5 @@ import 'package:tadawal/features/product/domain/entity/product.dart';
 abstract class ProductRepository {
   Future<Either<Failure, Product>> getProduct();
 
-  Future<Either<Failure, Product>> addProduct();
+  Future<Either<Failure, Product>> addProduct({required Product product});
 }

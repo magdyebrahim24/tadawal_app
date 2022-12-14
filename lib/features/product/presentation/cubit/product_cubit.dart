@@ -25,26 +25,23 @@ class ProductCubit extends Cubit<ProductStates> {
         (product) => ProductLoadedState(product: product)));
   }
 
-
-
-  Future<void> addProductEntity() async {
-
+  Future<void> addProductEntity(
+      {required Map<String, dynamic> addProductData}) async {
     emit(ProductIsLoadingState());
-    Either<Failure, Product> productEntity = await addProductUseCase(
-        const Product(
-            id: 0,
-            tittle: 'tittle',
-            price: 10,
-            description: 'description',
-            image: 'image',
-            category: 'category'));
+    Product productObject = const Product(
+        id: 2,
+        tittle: 'magdy good',
+        price: 1000,
+        description: 'its fantastic',
+        image: 'image',
+        category: 'category');
+    Either<Failure, Product> productEntity =
+        await addProductUseCase(productObject);
+
     emit(productEntity.fold(
         (failure) => ProductErrorState(msg: _mapFailureToMsg(failure)),
-        (product) => AddProductState(product: product)));
+        (product) => ProductLoadedState(product: product)));
   }
-
-
-
 
   String _mapFailureToMsg(Failure failure) {
     switch (failure.runtimeType) {
