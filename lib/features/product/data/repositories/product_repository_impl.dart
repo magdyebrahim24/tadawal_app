@@ -14,37 +14,41 @@ class ProductRepositoriesImpl implements ProductRepository {
 
   ProductRepositoriesImpl(
       {required this.networkInfo,
-    required this.localProductDataSource,
-    required this.remoteProductDataSource});
+      required this.localProductDataSource,
+      required this.remoteProductDataSource});
 
   @override
   Future<Either<Failure, Product>> getProduct() async {
     if (await networkInfo.isConnected) {
       try {
         final remoteProductData =
-        await remoteProductDataSource.getRemoteProductData();
+            await remoteProductDataSource.getRemoteProductData();
         localProductDataSource.cacheProduct(remoteProductData);
         return Right(remoteProductData);
       } on ServerException {
         return Left(ServerFailure());
       }
     } else {
-      try {
-        final localProductData =
-        await localProductDataSource.getCachedProductData();
-        return Right(localProductData);
-      } on CacheException {
-        return Left(CacheFailure());
-      }
+      return Left(ServerFailure());
     }
   }
+  // else {
+  //   try {
+  //     final localProductData =
+  //     await localProductDataSource.getCachedProductData();
+  //     return Right(localProductData);
+  //   } on CacheException {
+  //     return Left(CacheFailure());
+  //   }
+  // }
+  // }
 
   @override
-  Future<Either<Failure, Product>> addProduct() async{
+  Future<Either<Failure, Product>> addProduct({required Product product}) async {
     try {
-    // final  ProductModel productModel ;
+      // final  ProductModel productModel ;
       final remoteProductData =
-          await remoteProductDataSource.addRemoteProductData();
+          await remoteProductDataSource.addRemoteProductData(product: product);
       localProductDataSource.cacheProduct(remoteProductData);
       return Right(remoteProductData);
     } on ServerException {
@@ -52,9 +56,6 @@ class ProductRepositoriesImpl implements ProductRepository {
     }
   }
 }
-
-
-
 
 //
 //   getRemoteProductDataAndCacheItAndHandelServerException() async{

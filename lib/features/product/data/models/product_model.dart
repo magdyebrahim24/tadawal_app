@@ -48,7 +48,7 @@ class ProductModel extends Product {
         stock: json["stock"],
         brand: json["brand"],
         category: json["category"],
-        image: json["thumbnail"],
+        image: json["thumbnail"] ?? '',
         listOfImages: List<String>.from(json["images"].map((x) => x)),
       );
 
