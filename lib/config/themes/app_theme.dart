@@ -18,7 +18,8 @@ class AppTheme {
         iconTheme: IconThemeData(color: Colors.black, size: 20),
       ),
       textTheme: const TextTheme(
+        headline4: TextStyle(fontWeight: FontWeight.bold, color: AppColors.secondColor) ,
           headline6: TextStyle(fontWeight: FontWeight.w800),
-          bodyText1: TextStyle(
-              fontWeight: FontWeight.w600, fontSize: 17, height: 1.25)));
+          bodyText1: TextStyle(color: AppColors.secondColor,
+              fontWeight: FontWeight.w700, fontSize: 18, height: 1.25)));
 }

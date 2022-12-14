@@ -26,6 +26,7 @@ class ProductErrorState extends ProductStates {
   List<Object?> get props => [msg];
 }
 
+// ignore: must_be_immutable
 class AddProductState extends ProductStates {
   Product product = const Product(
       id: 0,

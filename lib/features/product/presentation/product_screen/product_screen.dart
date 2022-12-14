@@ -40,26 +40,25 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Product Details'),
-        centerTitle: true,
-      ),
-      body: BlocBuilder<ProductCubit, ProductStates>(builder: (context, state) {
-        if (state is ProductIsLoadingState) {
-          return loadingWidget();
-        } else if (state is ProductErrorState) {
-          return errorWidget(context,
-              onPressFun: _getProductFun, msg: state.msg);
-        } else if (state is ProductLoadedState) {
-          return productContent(context, product: state.product);
-        } else {
-          return const Center(child: Text('un expected state'));
-        }
-      }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _addProductFun(addProductData),
-        child: const Icon(Icons.add),
+    return SafeArea(
+      child: Scaffold(
+        body: BlocBuilder<ProductCubit, ProductStates>(builder: (context, state) {
+          if (state is ProductIsLoadingState) {
+            return loadingWidget();
+          } else if (state is ProductErrorState) {
+            return errorWidget(context,
+                onPressFun: _getProductFun, msg: state.msg);
+          } else if (state is ProductLoadedState) {
+            return productContent(context, product: state.product);
+          } else {
+            return const Center(child: Text('un expected state'));
+          }
+        }),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: () => _addProductFun(addProductData),
+          child: const Icon(Icons.refresh,color: Colors.black),
+        ),
       ),
     );
   }

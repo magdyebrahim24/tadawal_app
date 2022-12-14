@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tadawal/app.dart';
-import 'package:tadawal/bloc_observer.dart';
+import 'package:tadawal/core/utils/bloc_observer.dart';
 import 'injection_container.dart' as di;
 
 

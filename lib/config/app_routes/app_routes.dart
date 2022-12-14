@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tadawal/core/utils/app_strings.dart';
-import 'package:tadawal/features/add_product/presentation/screens/add_product_secreen.dart';
 import 'package:tadawal/features/home/presentation/screens/home_screen.dart';
 import 'package:tadawal/features/product/presentation/cubit/product_cubit.dart';
 import 'package:tadawal/features/product/presentation/product_screen/product_screen.dart';
@@ -33,10 +32,10 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const ProductScreen(),
         );
-      case Routes.addProductRoute:
-        return MaterialPageRoute(
-          builder: (context) => const AddProductScreen(),
-        );
+      // case Routes.addProductRoute:
+      //   return MaterialPageRoute(
+      //     builder: (context) => const AddProductScreen(),
+      //   );
 
       default:
         return null;
