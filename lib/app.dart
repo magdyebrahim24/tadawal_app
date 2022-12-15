@@ -12,7 +12,7 @@ class TadawalApp extends StatelessWidget {
       title: AppStrings.appName,
       theme: AppTheme().lightTheme,
       debugShowCheckedModeBanner: false,
-      // home: const HomeScreen(),
+      // home:  const AddProductScreen(),
       onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }

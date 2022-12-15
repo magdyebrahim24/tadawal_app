@@ -1,6 +1,6 @@
 
 class EndPoints {
-  static  String baseUrl = 'https://dummyjson.com/products' ;
-  static  String getOneProductUrl = '$baseUrl/3' ;
-  static  String addProductUrl = '$baseUrl/add' ;
+  static  String baseUrl = 'https://dummyjson.com' ;
+  static  String getAllProductsUrl = '$baseUrl/products' ;
+  static  String addProductUrl = '$getAllProductsUrl/add' ;
 }

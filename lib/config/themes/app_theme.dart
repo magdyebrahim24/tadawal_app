@@ -21,5 +21,9 @@ class AppTheme {
         headline4: TextStyle(fontWeight: FontWeight.bold, color: AppColors.secondColor) ,
           headline6: TextStyle(fontWeight: FontWeight.w800),
           bodyText1: TextStyle(color: AppColors.secondColor,
-              fontWeight: FontWeight.w700, fontSize: 18, height: 1.25)));
+              fontWeight: FontWeight.w700, fontSize: 18, height: 1.25),
+      subtitle1: TextStyle(
+        color: AppColors.secondColor,
+      ),
+      ));
 }

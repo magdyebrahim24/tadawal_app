@@ -29,3 +29,21 @@
 // use internet_connection_checker package to check internet  --> create NetworkInfoImpl in NetworkInfo
 // finish product remote data
 
+
+
+----------------------------------------------------------
+
+// if there is params like login page
+/*
+class LogIn extends Equatable{
+  final String name ;
+  final String password;
+
+  const LogIn(this.name, this.password);
+  @override
+  List<Object?> get props => [name , password];
+
+}
+
+
+ */

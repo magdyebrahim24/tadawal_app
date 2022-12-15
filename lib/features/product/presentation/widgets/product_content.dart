@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tadawal/core/utils/media_query_values.dart';
 import 'package:tadawal/features/product/domain/entity/product.dart';
-import 'package:tadawal/features/product/presentation/widgets/float_button.dart';
+import 'package:tadawal/core/widgets/float_button.dart';
 
 Widget productContent(BuildContext context, {required Product product}) {
   return Container(
@@ -19,15 +19,15 @@ Widget productContent(BuildContext context, {required Product product}) {
       ],
     ),
     padding: const EdgeInsets.all(17.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        floatButton(
-            onPressFun: () => Navigator.pop(context),
-            icon: Icons.arrow_back_rounded),
-        Expanded(
-          child: Column(
+    child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          floatButton(
+              onPressFun: () => Navigator.pop(context),
+              icon: Icons.arrow_back_rounded),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,17 +36,17 @@ Widget productContent(BuildContext context, {required Product product}) {
                 height: 24,
               ),
               Text(product.tittle,
-                  style: Theme.of(context).textTheme.headline4),
+                  style: Theme.of(context).textTheme.headline4,),
               const SizedBox(
                 height: 7,
               ),
               Text(product.description,
-                  style: Theme.of(context).textTheme.bodyText1),
+                  style: Theme.of(context).textTheme.bodyText1,),
               const SizedBox(
                 height: 10,
               ),
               Text(product.category,
-                  style: Theme.of(context).textTheme.bodyText1),
+                  style: Theme.of(context).textTheme.bodyText1,),
               SizedBox(
                 height: context.height * .1,
               ),
@@ -82,8 +82,8 @@ Widget productContent(BuildContext context, {required Product product}) {
                       .copyWith(fontSize: 22)),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

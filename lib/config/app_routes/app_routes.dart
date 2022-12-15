@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tadawal/core/utils/app_strings.dart';
-import 'package:tadawal/features/home/presentation/screens/home_screen.dart';
 import 'package:tadawal/features/product/presentation/cubit/product_cubit.dart';
+import 'package:tadawal/features/product/presentation/product_screen/add_product_screen.dart';
+import 'package:tadawal/features/product/presentation/product_screen/home_screen.dart';
 import 'package:tadawal/features/product/presentation/product_screen/product_screen.dart';
 import 'package:tadawal/injection_container.dart' as di;
 
@@ -17,25 +18,35 @@ class Routes {
 class AppRoutes {
   static Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+
       case Routes.initialRoute:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create : (context) => di.sl<ProductCubit>()..getProductEntity(),
-            child:  const ProductScreen(),
+            create : (context) => di.sl<ProductCubit>()..getAllProducts(),
+            child:  const HomeScreen(),
+          ),        );
+      case Routes.productRoute:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create : (context) => di.sl<ProductCubit>()
+              ..getProductEntity(productId: routeSettings.arguments as int ),
+            child:  ProductScreen(
+              productId: routeSettings.arguments as int,
+            ),
           ),
         );
       case Routes.homeRoute:
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
         );
-      case Routes.productRoute:
+
+      case Routes.addProductRoute:
         return MaterialPageRoute(
-          builder: (context) => const ProductScreen(),
+          builder: (context) => BlocProvider(
+            create : (context) => di.sl<ProductCubit>(),
+            child:  const AddProductScreen(),
+          ),
         );
-      // case Routes.addProductRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) => const AddProductScreen(),
-      //   );
 
       default:
         return null;

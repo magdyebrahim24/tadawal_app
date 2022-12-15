@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:tadawal/features/product/domain/entity/all_products.dart';
 import 'package:tadawal/features/product/domain/entity/product.dart';
 
 abstract class ProductStates extends Equatable {
@@ -17,6 +18,13 @@ class ProductLoadedState extends ProductStates {
 
   @override
   List<Object?> get props => [product];
+}
+
+class AllProductsLoadedState extends ProductStates {
+  final AllProducts allProducts;
+  const AllProductsLoadedState({required this.allProducts});
+  @override
+  List<Object?> get props => [allProducts];
 }
 
 class ProductErrorState extends ProductStates {

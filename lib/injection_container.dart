@@ -12,6 +12,7 @@ import 'package:tadawal/features/product/data/datasources/remote/product_remote_
 import 'package:tadawal/features/product/data/repositories/product_repository_impl.dart';
 import 'package:tadawal/features/product/domain/repositories/product_repository.dart';
 import 'package:tadawal/features/product/domain/usecases/add_product_usecase.dart';
+import 'package:tadawal/features/product/domain/usecases/get_all_products_uscase.dart';
 import 'package:tadawal/features/product/domain/usecases/get_product_usecase.dart';
 import 'package:tadawal/features/product/presentation/cubit/product_cubit.dart';
 
@@ -22,7 +23,7 @@ Future<void> init() async {
 
   // Blocs
   sl.registerFactory<ProductCubit>(
-      () => ProductCubit(addProductUseCase: sl(), getProductUseCase: sl()));
+      () => ProductCubit(getAllProductsUseCase: sl(),addProductUseCase: sl(), getProductUseCase: sl()));
   // sl.registerFactory<LocaleCubit>(
   //         () => LocaleCubit(getSavedLangUseCase: sl(), changeLangUseCase: sl()));
 
@@ -31,6 +32,8 @@ Future<void> init() async {
       () => GetProductUseCase(productRepository: sl()));
   sl.registerLazySingleton<AddProductUseCase>(
       () => AddProductUseCase(productRepository: sl()));
+  sl.registerLazySingleton<GetAllProductsUseCase>(
+          () => GetAllProductsUseCase(productRepository: sl()));
 
   // sl.registerLazySingleton<ChangeLangUseCase>(
   //         () => ChangeLangUseCase(langRepository: sl()));
