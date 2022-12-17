@@ -7,7 +7,7 @@ import 'injection_container.dart' as di;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  di.init();
+  await di.init();
   Bloc.observer = AppBlocObserver();
   runApp(const TadawalApp());
 }

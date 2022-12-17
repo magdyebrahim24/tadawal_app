@@ -5,6 +5,7 @@ import 'package:tadawal/features/product/presentation/cubit/product_cubit.dart';
 import 'package:tadawal/features/product/presentation/product_screen/add_product_screen.dart';
 import 'package:tadawal/features/product/presentation/product_screen/home_screen.dart';
 import 'package:tadawal/features/product/presentation/product_screen/product_screen.dart';
+import 'package:tadawal/features/splash_screen/presentation/screen/splash_screen.dart';
 import 'package:tadawal/injection_container.dart' as di;
 
 
@@ -21,10 +22,16 @@ class AppRoutes {
 
       case Routes.initialRoute:
         return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
+        );
+
+      case Routes.homeRoute:
+        return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create : (context) => di.sl<ProductCubit>()..getAllProducts(),
             child:  const HomeScreen(),
           ),        );
+
       case Routes.productRoute:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -34,10 +41,6 @@ class AppRoutes {
               productId: routeSettings.arguments as int,
             ),
           ),
-        );
-      case Routes.homeRoute:
-        return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
         );
 
       case Routes.addProductRoute:
